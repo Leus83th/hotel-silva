@@ -4,21 +4,47 @@
     <meta charset="UTF-8">
     <title>Hotel Silva - Login</title>
     <link rel="stylesheet" href="css/estilos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
-<body>
+<body class="login-page">
 
-    <div class="login-container">
-        <h2>Hotel Silva</h2>
-        <form id="loginForm">
-            <label>Usuario</label>
-            <input type="text" id="usuario" required>
-            
-            <label>Contraseña</label>
-            <input type="password" id="contrasena" required>
-            
-            <button type="submit">Ingresar</button>
-        </form>
+    <header class="header-login">
+        <div class="mini-logo">
+            <img src="frontend/image/logo de hotel.png" alt="DS" style="height: 40px;">
+        </div>
+        <div class="contact-header">
+            <i class="fa-solid fa-phone"></i> Contactanos
+        </div>
+    </header>
+
+    <div class="login-main-layout">
+        
+        <div class="login-logo-side">
+            <img src="frontend/image/logo de hotel.png" alt="Hotel Silva Logo" class="logo-grande">
+        </div>
+
+        <div class="login-form-side">
+            <div class="login-container"> 
+                <form id="loginForm">
+                    
+                    <label>Usuario</label>
+                    <div class="login-input-wrapper">
+                        <i class="fa-regular fa-user input-icon"></i>
+                        <input type="text" id="usuario" placeholder="rodrixc1010" required>
+                    </div>
+                    
+                    <label>Contraseña</label>
+                    <div class="login-input-wrapper">
+                        <i class="fa-solid fa-lock input-icon"></i>
+                        <input type="password" id="contrasena" placeholder="ingresa tu contraseña" required>
+                    </div>
+                    
+                    <button type="submit" class="btn-login-submit">Ingresar</button>
+                </form>
+            </div>
+        </div>
+
     </div>
 
     <script src="js/auth.js"></script>

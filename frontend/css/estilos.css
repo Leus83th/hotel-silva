@@ -55,3 +55,149 @@ button {
 
 .btn-editar { background-color: #d4af37; color: #000; }
 .btn-eliminar { background-color: #c0392b; color: #fff; }
+/* ==========================================================================
+   NUEVOS ESTILOS EXCLUSIVOS PARA EL LOGIN (INSPIRADO EN TU DISEÑO)
+   ========================================================================== */
+
+/* Fondo con la imagen del hotel */
+body.login-page {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('image/hotel-3.jpg'); 
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+}
+
+/* Header superior transparente */
+.header-login {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 5%;
+    background-color: rgba(20, 20, 20, 0.6);
+}
+.contact-header {
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+.contact-header i { margin-right: 8px; color: #ffffff; }
+
+/* Layout lado a lado */
+.login-main-layout {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    flex: 1;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Sección del logo izquierdo */
+.login-logo-side {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.logo-grande {
+    max-width: 320px;
+    width: 100%;
+    height: auto;
+}
+
+/* Sección del formulario derecho */
+.login-form-side {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-container {
+    width: 100%;
+    max-width: 380px;
+}
+
+.login-container form {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Estilo de los textos "Usuario" y "Contraseña" */
+.login-container label {
+    display: block;
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+    text-align: center;
+    color: #ffffff;
+}
+
+/* Caja contenedora para meter el icono dentro del input */
+.login-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-bottom: 25px;
+    width: 100%;
+}
+
+/* Inputs estilo píldora blanca */
+.login-input-wrapper input {
+    width: 100%;
+    padding: 15px 20px 15px 50px; /* Margen izquierdo para el icono */
+    border-radius: 50px;
+    border: none;
+    background-color: #ffffff;
+    color: #333333;
+    font-size: 1rem;
+    outline: none;
+    box-sizing: border-box;
+}
+
+/* Iconos dentro de los inputs */
+.input-icon {
+    position: absolute;
+    left: 20px;
+    color: #888888;
+    font-size: 1.2rem;
+}
+
+/* Tu botón "Ingresar" adaptado al diseño de píldora blanca */
+.btn-login-submit {
+    background-color: #ffffff !important;
+    color: #121212 !important;
+    padding: 14px 20px !important;
+    border-radius: 50px !important;
+    font-size: 1.1rem !important;
+    font-weight: bold !important;
+    width: 100%;
+    max-width: 180px;
+    margin: 10px auto 0 auto !important;
+    transition: background-color 0.3s;
+}
+
+.btn-login-submit:hover {
+    background-color: #d4af37 !important;
+    color: #ffffff !important;
+}
+
+/* Soporte para celulares */
+@media (max-width: 768px) {
+    .login-main-layout {
+        flex-direction: column;
+        text-align: center;
+    }
+    .login-logo-side {
+        margin-bottom: 30px;
+    }
+}
