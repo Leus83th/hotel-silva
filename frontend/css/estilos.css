@@ -201,3 +201,139 @@ body.login-page {
         margin-bottom: 30px;
     }
 }
+/* ==========================================================================
+   NUEVOS ESTILOS PREMIUM PARA LA PÁGINA DE CLIENTES
+   (Estilo Letrero Nocturno)
+   ========================================================================== */
+
+/* Fondo con la imagen del letrero de noche (iluminado y difuminado) */
+body.clientes-page {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('image/imagen1.jpeg'); /* Asegúrate de que esta sea la ruta de tu foto de noche */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+}
+
+/* Ajustes para la Navbar: Fondo oscuro y enlaces a la derecha */
+body.clientes-page .navbar {
+    background-color: #121212; /* Fondo negro sólido para el menú */
+    border-bottom: 2px solid #d4af37;
+    display: flex;
+    justify-content: space-between; /* Logo a la izq, enlaces a la der */
+    align-items: center;
+    padding: 15px 5%;
+}
+
+/* El logo de la navbar */
+.logo-nav img {
+    height: 45px;
+    width: auto;
+}
+
+/* Enlaces del menú estilo Figma de la imagen */
+.nav-links {
+    display: flex;
+    gap: 30px; /* Separación de 30px entre enlaces */
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.nav-links a {
+    color: #ffffff; /* Texto blanco para mayor contraste */
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1rem;
+    transition: color 0.2s;
+}
+
+/* Texto dorado para la página activa */
+.nav-links a.active, 
+.nav-links a:hover {
+    color: #d4af37;
+}
+
+/* Botón Salir estilo Figma (Dorado) */
+.btn-salir {
+    background-color: transparent; 
+    color: #d4af37; 
+    border: 2px solid #d4af37; /* Borde dorado */
+    font-weight: bold;
+    border-radius: 4px;
+    padding: 8px 16px;
+    margin-left: 0px; /* Quitamos el margen izquierdo extra */
+    transition: all 0.2s;
+}
+.btn-salir:hover {
+    background-color: #d4af37;
+    color: #121212;
+}
+
+/* Contenedor central que centra la tabla vertical y horizontalmente */
+.tabla-main-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+}
+
+/* Caja de la tabla con el aspecto del cartel de tu diseño */
+/* 1. Contenedor principal con degradado translúcido oscuro */
+.tabla-contenedor {
+    width: 100%;
+    max-width: 1000px;
+    background: linear-gradient(135deg, rgba(26, 26, 26, 0.75), rgba(45, 45, 45, 0.6)); 
+    padding: 40px;
+    border-radius: 12px;
+    border: 2px solid rgba(214, 175, 55, 0.4); 
+    backdrop-filter: blur(8px); 
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6); 
+    text-align: center;
+}
+
+.tabla-contenedor h2 {
+    color: #ffffff; /* Texto blanco para el título */
+    font-size: 2rem;
+    letter-spacing: 2px;
+    margin-bottom: 25px;
+}
+
+/* Rediseño de la Tabla Estilo Premium Figma (Encabezados dorados) */
+body.clientes-page table {
+    width: 100%;
+    margin: 0 auto;
+    border-collapse: collapse;
+    background-color: transparent; /* Quitamos el fondo negro sólido */
+}
+
+/* 2. Encabezados de la tabla con degradado dorado translúcido */
+body.clientes-page th {
+    background: linear-gradient(90deg, rgba(214, 175, 55, 0.85), rgba(197, 160, 48, 0.7));
+    color: #121212; 
+    font-size: 1.1rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    padding: 15px;
+    border-bottom: 2px solid #d4af37;
+}
+/* 3. Celdas del cuerpo de la tabla */
+body.clientes-page td {
+    padding: 14px;
+    color: #ffffff;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08); 
+    text-align: center;
+    font-size: 1rem;
+    background-color: rgba(0, 0, 0, 0.1); 
+}
+
+/* Efecto hover elegante para las filas de la tabla */
+body.clientes-page tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.03);
+}

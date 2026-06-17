@@ -8,34 +8,41 @@
     <script src="js/clientes.js"></script>
     <script src="js/auth.js"></script>
 </head>
-<body>
+<body class="clientes-page">
+
     <nav class="navbar">
-        <div class="logo">Hotel Silva</div>
+        <div class="logo-nav">
+            <img src="frontend/image/logo de hotel.png" alt="DS Logo">
+        </div>
         <ul class="nav-links">
-            <li><a href="clientes.html">Clientes</a></li>
+            <li><a href="clientes.html" class="active">Clientes</a></li>
             <li><a href="registro.html">Registrar Cliente</a></li>
             <li><a href="habitaciones.html">Habitaciones</a></li>
             <li><a href="reservas.html">Reservas</a></li>
-            <li><button onclick="cerrarSesion()" style="background-color: #c0392b; color: white; margin-left: 20px;">Salir</button></li>
+            <li><button onclick="cerrarSesion()" class="btn-salir">Salir</button></li>
         </ul>
     </nav>
-    <div class="tabla-contenedor">
-        <h2>CLIENTES</h2>
-        
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Apellido</th>
-                    <th>Correo</th>
-                    <th>Teléfono</th>
-                    <th>Acciones</th> </tr>
-            </thead>
-            <tbody id="tablaClientesBody">
-                </tbody>
-        </table>
-    </div>
+
+    <main class="tabla-main-container">
+        <div class="tabla-contenedor">
+            <h2>CLIENTES</h2>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Correo</th>
+                        <th>Teléfono</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="tablaClientesBody">
+                    </tbody>
+            </table>
+        </div>
+    </main>
 
 </body>
 </html>
