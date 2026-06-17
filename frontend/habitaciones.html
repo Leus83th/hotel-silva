@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Silva - Inventario de Habitaciones</title>
+    <link rel="stylesheet" href="css/estilos.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="js/reservas.js"></script>
+    <script src="js/auth.js"></script>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">Hotel Silva</div>
+        <ul class="nav-links">
+            <li><a href="clientes.html">Clientes</a></li>
+            <li><a href="registro.html">Registrar Cliente</a></li>
+            <li><a href="habitaciones.html" class="active">Habitaciones</a></li>
+            <li><a href="reservas.html">Reservas</a></li>
+            <li><button onclick="cerrarSesion()" style="background-color: #c0392b; color: white; margin-left: 20px;">Salir</button></li>
+        </ul>
+    </nav>
+    <div class="tabla-contenedor">
+    <h2>INVENTARIO DE HABITACIONES</h2>
+    <button onclick="abrirModalHabitacion()" style="background-color: #d4af37; color: black; margin-bottom: 15px; font-weight: bold; padding: 10px 20px;">+ Agregar Habitación</button>
+    
+    <table class="tabla-hotel">
+        </table>
+</div>
+    <div class="tabla-contenedor">
+        <h2>INVENTARIO DE HABITACIONES</h2>
+        
+        <table class="tabla-hotel">
+            <thead>
+                <tr>
+                    <th>ID HABITACIÓN</th>
+                    <th>NÚMERO HABITACIÓN</th>
+                    <th>TIPO DE HABITACIÓN</th>
+                    <th>PRECIO NOCHE</th>
+                </tr>
+            </thead>
+            <tbody id="tablaHabitacionesBody">
+                <tr>
+                    <td colspan="4" style="text-align: center; color: #888;">Cargando habitaciones...</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <footer class="footer-hotel">
+        <p>Programadores J.V.C.V | @Hotel_DS_Silva | Beni - Bolivia</p>
+    </footer>
+
+</body>
+</html>

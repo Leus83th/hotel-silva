@@ -1,0 +1,57 @@
+/* Paleta de colores Hotel Silva (Figma) */
+body {
+    background-color: #121212; /* Fondo oscuro principal */
+    color: #ffffff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+}
+
+.navbar {
+    background-color: #1a1a1a;
+    border-bottom: 2px solid #d4af37; /* Línea dorada */
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 5%;
+}
+
+.nav-links a {
+    color: #fff;
+    text-decoration: none;
+    margin-left: 20px;
+}
+
+.nav-links a.active, .nav-links a:hover {
+    color: #d4af37; /* Texto dorado para la página activa */
+    font-weight: bold;
+}
+
+/* Tablas estilo Premium */
+table {
+    width: 90%;
+    margin: 30px auto;
+    border-collapse: collapse;
+    background-color: #1a1a1a;
+}
+
+th {
+    background-color: #d4af37;
+    color: #121212;
+    padding: 12px;
+}
+
+td {
+    padding: 10px;
+    border-bottom: 1px solid #333;
+    text-align: center;
+}
+
+/* Botones de acción */
+button {
+    cursor: pointer;
+    border-radius: 4px;
+    border: none;
+    padding: 6px 12px;
+}
+
+.btn-editar { background-color: #d4af37; color: #000; }
+.btn-eliminar { background-color: #c0392b; color: #fff; }
