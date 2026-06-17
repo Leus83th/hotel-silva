@@ -337,3 +337,376 @@ body.clientes-page td {
 body.clientes-page tbody tr:hover {
     background-color: rgba(255, 255, 255, 0.03);
 }
+/* ==========================================================================
+   ESTILOS EXCLUSIVOS PARA LA PÁGINA DE REGISTRO CON FOOTER
+   ========================================================================== */
+
+/* Fondo con la tarjeta de presentación oscura texturizada */
+body.registro-page {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('image/imagen2.jpeg'); /* Pon aquí el nombre de la imagen de fondo con las flores doradas */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+}
+
+/* Navbar estilo Registro */
+body.registro-page .navbar {
+    background-color: rgba(20, 20, 20, 0.6) !important;
+    backdrop-filter: blur(4px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Área central del formulario */
+.registro-main-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 20px;
+}
+
+/* Contenedor flotante redondeado y oscuro (Card) */
+.card-registro {
+    width: 100%;
+    max-width: 500px;
+    background-color: rgba(18, 18, 18, 0.85); /* Fondo oscuro con ligera transparencia */
+    border-radius: 40px; /* Bordes muy curvos como en la imagen */
+    padding: 40px 50px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    text-align: center;
+}
+
+.card-registro h3 {
+    color: rgba(255, 255, 255, 0.4); /* Letras grisáceas/apagadas para el título superior */
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+    font-weight: normal;
+    text-transform: capitalize;
+}
+
+/* Agrupación de Label + Input en paralelo */
+.registro-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    background-color: #ffffff; /* Caja contenedora blanca */
+    border-radius: 50px; /* Forma de píldora completa */
+    padding: 6px 25px;
+}
+
+.card-registro label {
+    color: #888888; /* Texto gris para las etiquetas "Nombre(s):", etc. */
+    font-weight: 600;
+    font-size: 1rem;
+    white-space: nowrap;
+    margin-right: 10px;
+}
+
+.card-registro input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    padding: 10px 0;
+    font-size: 1rem;
+    color: #333333;
+    outline: none;
+}
+
+/* Botón Siguiente en óvalo blanco */
+.btn-registro-submit {
+    background-color: #ffffff !important;
+    color: #121212 !important;
+    border: none;
+    padding: 14px 40px;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.btn-registro-submit:hover {
+    background-color: #d4af37 !important;
+    color: #ffffff !important;
+}
+
+/* ==========================================================================
+   ESTILOS DEL FOOTER PREMIUM
+   ========================================================================== */
+.footer-premium {
+    background-color: rgba(15, 15, 15, 0.85);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.9rem;
+    padding: 40px 8% 20px 8%;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 40px;
+}
+
+.footer-column {
+    flex: 1;
+    min-width: 280px;
+}
+
+/* Logo de la izquierda */
+.footer-logo {
+    height: 70px;
+    margin-bottom: 20px;
+}
+
+.info-links p, .phone-mail-info p {
+    margin: 8px 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.info-links i, .phone-mail-info i {
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 1.1rem;
+    width: 20px;
+}
+
+/* Lado derecho del boletín */
+.boletin-text {
+    line-height: 1.5;
+    margin-bottom: 15px;
+}
+
+.boletin-input-wrapper input {
+    width: 100%;
+    max-width: 300px;
+    padding: 10px 20px;
+    border-radius: 50px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 255, 255, 0.05);
+    color: white;
+    outline: none;
+    margin-bottom: 20px;
+}
+
+/* Derechos de autor abajo */
+.footer-bottom {
+    text-align: center;
+    margin-top: 30px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding-top: 20px;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.3);
+}
+
+/* Responsivo para pantallas de celulares */
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        text-align: center;
+    }
+    .info-links p, .phone-mail-info p {
+        justify-content: center;
+    }
+    .boletin-input-wrapper input {
+        margin: 0 auto 20px auto;
+    }
+}
+/* ==========================================================================
+   ESTILOS EXCLUSIVOS PARA LA PÁGINA DE HABITACIONES (INVENTARIO)
+   ========================================================================== */
+
+/* Fondo específico usando la imagen del letrero iluminado */
+body.habitaciones-page {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)), url('image/habitacion_00..png'); 
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+}
+
+/* Navbar traslúcida sobre el fondo */
+body.habitaciones-page .navbar {
+    background-color: rgba(78, 78, 78, 0.6) !important;
+    backdrop-filter: blur(4px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Botón Agregar Habitación de diseño elegante */
+.btn-agregar-habitacion {
+    background-color: #d4af37;
+    color: #121212;
+    font-weight: bold;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-bottom: 25px;
+    font-size: 0.95rem;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.btn-agregar-habitacion:hover {
+    background-color: #f1c40f;
+    transform: translateY(-1px);
+}
+
+/* LA TRASPARENCIA Y DEGRADADO PARA TU DIV "tabla-contenedor" */
+body.habitaciones-page .tabla-contenedor {
+    width: 100%;
+    max-width: 1000px;
+    /* Degradado en diagonal semi-transparente que deja ver el fondo */
+    background: linear-gradient(135deg, rgba(26, 26, 26, 0.75), rgba(45, 45, 45, 0.55)); 
+    padding: 40px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    
+    /* Desenfoque del fondo (Efecto cristal translúcido) */
+    backdrop-filter: blur(8px); 
+    -webkit-backdrop-filter: blur(8px);
+    
+    /* Sombra profunda */
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6); 
+    text-align: center;
+    margin: 0 auto;
+}
+
+body.habitaciones-page .tabla-contenedor h2 {
+    color: #ffffff;
+    font-size: 2rem;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+    margin-top: 0;
+}
+
+/* Estilos de la Tabla del Hotel */
+.tabla-hotel {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: transparent;
+}
+
+.tabla-hotel th {
+    /* Degradado dorado translúcido para los encabezados */
+    background: linear-gradient(90deg, rgba(214, 175, 55, 0.85), rgba(197, 160, 48, 0.7));
+    color: #121212;
+    font-size: 1rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    padding: 15px;
+    border-bottom: 2px solid #d4af37;
+    text-transform: uppercase;
+}
+
+.tabla-hotel td {
+    padding: 14px;
+    color: #ffffff;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    text-align: center;
+    font-size: 0.95rem;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Resaltado suave al pasar el mouse por las filas */
+.tabla-hotel tbody tr:hover {
+    background-color: rgba(214, 175, 55, 0.06);
+    transition: background-color 0.2s ease;
+}
+/* ==========================================================================
+   ESTILOS EXCLUSIVOS PARA LA PÁGINA DE RESERVAS (ESTADO DE RESERVA)
+   ========================================================================== */
+
+/* Fondo con la imagen de la fachada del hotel al atardecer */
+body.reservas-page {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('image/hotel-3.jpg'); /* Pon el nombre exacto de tu imagen de la fachada */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+}
+
+/* Forzar barra transparente sutil sobre el fondo */
+body.reservas-page .navbar {
+    background-color: rgba(20, 20, 20, 0.6) !important;
+    backdrop-filter: blur(4px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Botón Salir en mayúsculas y color dorado/blanco integrado en el menú */
+.btn-salir-nav {
+    background: transparent;
+    color: #ffffff;
+    border: none;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    padding: 0;
+    transition: color 0.2s;
+    text-transform: uppercase;
+}
+
+.btn-salir-nav:hover {
+    color: #d4af37; /* Cambia a dorado en el hover como en el Figma */
+}
+
+/* Botón Crear Reserva */
+.btn-crear-reserva {
+    background-color: #d4af37;
+    color: #121212;
+    font-weight: bold;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-bottom: 25px;
+    font-size: 0.95rem;
+    transition: background-color 0.2s;
+}
+
+.btn-crear-reserva:hover {
+    background-color: #f1c40f;
+}
+
+/* PROPIEDADES DE TRANSPARENCIA PARA EL CONTENEDOR DE RESERVAS */
+body.reservas-page .tabla-contenedor {
+    width: 100%;
+    max-width: 1100px;
+    /* Degradado lineal sutil */
+    background: linear-gradient(135deg, rgba(20, 20, 20, 0.75), rgba(40, 40, 40, 0.55)); 
+    padding: 40px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    
+    /* El truco del vidrio difuminado */
+    backdrop-filter: blur(8px); 
+    -webkit-backdrop-filter: blur(8px);
+    
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7); 
+    text-align: center;
+    margin: 0 auto;
+}
+
+body.reservas-page .tabla-contenedor h2 {
+    color: #ffffff;
+    font-size: 2rem;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+    margin-top: 0;
+}

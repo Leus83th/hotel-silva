@@ -1,16 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <title>Hotel Silva - Registrar Cliente</title>
+    <link rel="stylesheet" href="css/estilos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="js/clientes.js"></script>
 </head>
-<body>
-    <form id="formRegistroCliente">
-        <input type="text" id="nombre" placeholder="Nombre(s)" required>
-        <input type="text" id="apellido" placeholder="Apellido(s)" required>
-        <input type="email" id="correo" placeholder="Correo" required>
-        <input type="text" id="telefono" placeholder="Teléfono" required>
-        
-        <button type="submit">SIGUIENTE</button>
-    </form>
+<body class="registro-page">
+
+    <nav class="navbar">
+        <div class="logo-nav">
+            <img src="css/image/logo2.png" alt="DS Logo">
+        </div>
+        <ul class="nav-links">
+            <li><a href="clientes.html">Volver</a></li>
+            <li><a href="habitaciones.html">Habitaciones</a></li>
+            <li><a href="clientes.html">Cliente</a></li>
+            <li><a href="reservas.html">Reservas</a></li>
+            <li><a href="#">Estado de Reserva</a></li>
+        </ul>
+    </nav>
+
+    <main class="registro-main-container">
+        <div class="card-registro">
+            <h3>Registro de cliente</h3>
+            
+            <form id="formRegistroCliente">
+                <div class="registro-group">
+                    <label>Nombre(s):</label>
+                    <input type="text" id="nombre" placeholder="Nombre(s)" required>
+                </div>
+
+                <div class="registro-group">
+                    <label>Apellido(s):</label>
+                    <input type="text" id="apellido" placeholder="Apellido(s)" required>
+                </div>
+
+                <div class="registro-group">
+                    <label>Correo:</label>
+                    <input type="email" id="correo" placeholder="Correo" required>
+                </div>
+
+                <div class="registro-group">
+                    <label>Teléfono:</label>
+                    <input type="text" id="telefono" placeholder="Teléfono" required>
+                </div>
+                
+                <button type="submit" class="btn-registro-submit">SIGUIENTE</button>
+            </form>
+        </div>
+    </main>
+
+    <footer class="footer-premium">
+        <div class="footer-container">
+            
+            <div class="footer-column logo-column">
+                <img src="css/image/logo2.png" alt="Hotel Silva Logo" class="footer-logo">
+                <div class="info-links">
+                    <p><i class="fa-brands fa-linkedin"></i> Programadores J.Y.C.V</p>
+                    <p><i class="fa-brands fa-instagram"></i> Hotel_DS_Silva</p>
+                    <p><i class="fa-brands fa-facebook"></i> Hotel_DS_Silva_Oficial</p>
+                    <p><i class="fa-solid fa-location-dot"></i> Beni_Bolivia_Calle#12 Z.rosa</p>
+                </div>
+            </div>
+
+            <div class="footer-column contact-column">
+                <p class="boletin-text">Recibe ideas exclusivas para tu próxima estancia: suscríbete a nuestro boletín de noticias.</p>
+                <div class="boletin-input-wrapper">
+                    <input type="email" placeholder="Dirección de e-mail">
+                </div>
+                <div class="phone-mail-info">
+                    <p><i class="fa-solid fa-phone"></i> +591 64096732</p>
+                    <p><i class="fa-solid fa-envelope"></i> Hotel_DS@gmail.com</p>
+                </div>
+            </div>
+
+        </div>
+        <div class="footer-bottom">
+            @2026 - Hotel Silva Bolivia
+        </div>
+    </footer>
+
 </body>
+</html>

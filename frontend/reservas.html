@@ -5,53 +5,78 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotel Silva - Control de Reservas</title>
     <link rel="stylesheet" href="css/estilos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="js/reservas.js"></script>
     <script src="js/auth.js"></script>
 </head>
-<body>
+<body class="reservas-page">
 
     <nav class="navbar">
-        <div class="logo">Hotel Silva</div>
+        <div class="logo-nav">
+            <img src="css/image/logo2.png" alt="DS Logo">
+        </div>
         <ul class="nav-links">
-            <li><a href="clientes.html">Clientes</a></li>
-            <li><a href="registro.html">Registrar Cliente</a></li>
+            <li><a href="clientes.html">Volver</a></li>
             <li><a href="habitaciones.html">Habitaciones</a></li>
+            <li><a href="clientes.html">Cliente</a></li>
             <li><a href="reservas.html" class="active">Reservas</a></li>
-            <li><button onclick="cerrarSesion()" style="background-color: #c0392b; color: white; margin-left: 20px;">Salir</button></li>
+            <li><button onclick="cerrarSesion()" class="btn-salir-nav">SALIR</button></li>
         </ul>
     </nav>
-    <div class="tabla-contenedor">
-    <h2>CONTROL DE RESERVAS (BACKOFFICE)</h2>
-    <button onclick="abrirModalReserva()" style="background-color: #d4af37; color: black; margin-bottom: 15px; font-weight: bold; padding: 10px 20px;">+ Crear Nueva Reserva</button>
-    
-    <table class="tabla-hotel">
-        </table>
-</div>
-    <div class="tabla-contenedor">
-        <h2>CONTROL DE RESERVAS (BACKOFFICE)</h2>
-        
-        <table class="tabla-hotel">
-            <thead>
-                <tr>
-                    <th>ID RESERVA</th>
-                    <th>CLIENTE</th>
-                    <th>HABITACIÓN</th>
-                    <th>FECHA INICIO</th>
-                    <th>FECHA FIN</th>
-                    <th>ESTADO</th>
-                </tr>
-            </thead>
-            <tbody id="tablaReservasBody">
-                <tr>
-                    <td colspan="6" style="text-align: center; color: #888;">Cargando historial de reservas...</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+<main class="tabla-main-container">
+        <div class="tabla-contenedor">
+            <h2>CONTROL DE RESERVAS (BACKOFFICE)</h2>
+            
+            <button onclick="abrirModalReserva()" class="btn-crear-reserva">+ Crear Nueva Reserva</button>
+            
+            <table class="tabla-hotel">
+                <thead>
+                    <tr>
+                        <th>ID RESERVA</th>
+                        <th>CLIENTE</th>
+                        <th>HABITACIÓN</th>
+                        <th>FECHA INICIO</th>
+                        <th>FECHA FIN</th>
+                        <th>ESTADO</th>
+                    </tr>
+                </thead>
+                <tbody id="tablaReservasBody">
+                    <tr>
+                        <td colspan="6" style="text-align: center; color: rgba(255,255,255,0.5);">Cargando historial de reservas...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+    <footer class="footer-premium">
+        <div class="footer-container">
+            
+            <div class="footer-column logo-column">
+                <img src="css/image/logo2.png" alt="Hotel Silva Logo" class="footer-logo">
+                <div class="info-links">
+                    <p><i class="fa-brands fa-linkedin"></i> Programadores J.Y.C.V</p>
+                    <p><i class="fa-brands fa-instagram"></i> Hotel_DS_Silva</p>
+                    <p><i class="fa-brands fa-facebook"></i> Hotel_DS_Silva_Oficial</p>
+                    <p><i class="fa-solid fa-location-dot"></i> Beni_Bolivia_Calle#12 Z.rosa</p>
+                </div>
+            </div>
 
-    <footer class="footer-hotel">
-        <p>Programadores J.V.C.V | @Hotel_DS_Silva | Beni - Bolivia</p>
+            <div class="footer-column contact-column">
+                <p class="boletin-text">Recibe ideas exclusivas para tu próxima estancia: suscríbete a nuestro boletín de noticias.</p>
+                <div class="boletin-input-wrapper">
+                    <input type="email" placeholder="Dirección de e-mail">
+                </div>
+                <div class="phone-mail-info">
+                    <p><i class="fa-solid fa-phone"></i> +591 64096732</p>
+                    <p><i class="fa-solid fa-envelope"></i> Hotel_DS@gmail.com</p>
+                </div>
+            </div>
+
+        </div>
+        <div class="footer-bottom">
+            @2026 - Hotel Silva Bolivia
+        </div>
     </footer>
 
 </body>
