@@ -1,82 +1,96 @@
-document.getElementById('loginForm').addEventListener('submit', async (e) => {
-    e.preventDefault(); // Evita que la página se recargue
+// ==========================================================================
+// 1. CONTROL EXCLUSIVO DE LA PANTALLA DE INICIO DE SESIÓN
+// ==========================================================================
+const loginForm = document.getElementById('loginForm');
 
-    const usuario = document.getElementById('usuario').value;
-    const contrasena = document.getElementById('contrasena').value;
+// Con este IF evitamos que el código se rompa en las páginas de las tablas
+if (loginForm) {
+    loginForm.addEventListener('submit', async (e) => {
+        e.preventDefault(); 
 
-    try {
-        // Enviamos los datos al backend
-        const response = await fetch('http://localhost:3001/api/login', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ usuario, contrasena })
-        });
+        const usuario = document.getElementById('usuario').value;
+        const contrasena = document.getElementById('contrasena').value;
 
-        const data = await response.json();
-
-        if (data.loginExitoso) {
-            // VENTANA DE ÉXITO
-            Swal.fire({
-                icon: 'success',
-                title: '¡Acceso Concedido!',
-                text: data.mensaje,
-                background: '#1a1a1a', // Fondo oscuro como tu Figma
-                color: '#fff',
-                confirmButtonColor: '#d4af37', // Botón dorado
-                timer: 2000, // Se cierra en 2 segundos solo
-                showConfirmButton: false
+        try {
+            const response = await fetch('http://localhost:3001/api/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ usuario, contrasena })
             });
 
-            // Guardamos la sesión en el navegador (Punto 2)
-            localStorage.setItem('adminLogueado', 'true');
+            const data = await response.json();
 
-            // Redirigimos a la página de clientes después de 2 segundos
-            setTimeout(() => {
-                window.location.href = 'clientes.html';
-            }, 2000);
+            if (data.loginExitoso) {
+                Swal.fire({
+                    icon: 'success',
+                    title: '¡Acceso Concedido!',
+                    text: data.mensaje,
+                    background: '#1a1a1a', 
+                    color: '#fff',
+                    confirmButtonColor: '#d4af37', 
+                    timer: 2000, 
+                    showConfirmButton: false
+                });
 
-        } else {
-            // VENTANA DE ERROR / ADVERTENCIA
+                // Guardamos con la clave 'adminLogueado'
+                localStorage.setItem('adminLogueado', 'true');
+
+                setTimeout(() => {
+                    window.location.href = 'clientes.html';
+                }, 2000);
+
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error de Autenticación',
+                    text: data.mensaje,
+                    background: '#1a1a1a',
+                    color: '#fff',
+                    confirmButtonColor: '#d4af37'
+                });
+            }
+
+        } catch (error) {
             Swal.fire({
-                icon: 'error',
-                title: 'Error de Autenticación',
-                text: data.mensaje,
+                icon: 'warning',
+                title: 'Error de conexión',
+                text: 'No se pudo conectar con el servidor backend.',
                 background: '#1a1a1a',
                 color: '#fff',
                 confirmButtonColor: '#d4af37'
             });
         }
+    });
+}
 
-    } catch (error) {
-        // En caso de que el backend esté apagado
-        Swal.fire({
-            icon: 'warning',
-            title: 'Error de conexión',
-            text: 'No se pudo conectar con el servidor backend.',
-            background: '#1a1a1a',
-            color: '#fff',
-            confirmButtonColor: '#d4af37'
-        });
+// ==========================================================================
+// 2. PROTECCIÓN DE RUTAS (Para que nadie entre escribiendo la URL)
+// ==========================================================================
+document.addEventListener("DOMContentLoaded", function () {
+    const sesionActiva = localStorage.getItem("adminLogueado");
+
+    // Si no está logueado y trata de ver una tabla, lo mandamos al login
+    if (sesionActiva !== "true" && !window.location.pathname.includes("login.html")) {
+        window.location.href = "login.html";
     }
 });
-// ==========================================
-// FUNCIÓN PARA CERRAR SESIÓN (LOGOUT)
-// ==========================================
-// Abre tu js/auth.js y verifica que la función se vea así:
-function cerrarSesion() {
-    // 1. Borramos el token o sesión (ejemplo usando localStorage)
-    localStorage.removeItem("usuarioLogueado"); 
-    // O sessionStorage.clear(); dependiendo de cómo manejes tu login
 
-    // 2. Alerta premium con SweetAlert2 antes de salir
+// ==========================================================================
+// 3. FUNCIÓN GLOBAL PARA CERRAR SESIÓN (Se limpia con la clave correcta)
+// ==========================================================================
+function cerrarSesion() {
+    // Borramos exactamente la misma llave que creamos arriba
+    localStorage.removeItem("adminLogueado"); 
+
     Swal.fire({
         title: 'Cerrando sesión',
         text: '¡Gracias por usar el sistema del Hotel Silva!',
         icon: 'success',
+        background: '#1a1a1a',
+        color: '#fff',
         timer: 1500,
         showConfirmButton: false
     }).then(() => {
-        // 3. Redirección al login
         window.location.href = "login.html";
     });
 }
