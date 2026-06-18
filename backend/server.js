@@ -2,7 +2,9 @@ const express = require('express');
 const cors = require('cors');
 
 const app = express();
-
+app.get('/', (req, res) => {
+    res.send('¡Hola! El servidor está respondiendo correctamente.');
+});
 // Middlewares
 app.use(cors());
 app.use(express.json());
@@ -19,6 +21,7 @@ app.use('/api', reservationRoutes);
 
 // Puerto de escucha
 const PORT = 3001;
+
 app.listen(PORT, () => {
     console.log(`Servidor corriendo en http://localhost:${PORT}`);
 });
