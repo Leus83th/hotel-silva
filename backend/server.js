@@ -15,9 +15,9 @@ const clientRoutes = require('./routes/clientRoutes');
 const reservationRoutes = require('./routes/reservationRoutes');
 
 // Redireccionar las llamadas de la API a sus respectivas rutas
-app.use('/api', authRoutes);         
-app.use('/api', clientRoutes);       
-app.use('/api', reservationRoutes);  
+app.use('/api/auth', authRoutes);         
+app.use('/api/clientes', clientRoutes);       
+app.use('/api/reservas', reservationRoutes);  
 
 // Puerto de escucha
 const PORT = 3001;
