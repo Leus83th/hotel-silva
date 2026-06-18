@@ -6,7 +6,8 @@
     <link rel="stylesheet" href="css/estilos.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="js/clientes.js"></script>
+    <script src="js/auth.js" defer></script>
+    <script src="js/clientes.js" defer></script>
 </head>
 <body class="registro-page">
 
@@ -15,10 +16,10 @@
             <img src="css/image/logo2.png" alt="DS Logo">
         </div>
         <ul class="nav-links">
-            <li><a href="clientes.html">Volver</a></li>
-            <li><a href="habitaciones.html">Habitaciones</a></li>
             <li><a href="clientes.html">Cliente</a></li>
+            <li><a href="registro.html" class="active">Registro de cliente</a></li>
             <li><a href="reservas.html">Reservas</a></li>
+            <li><a href="habitaciones.html">Habitaciones</a></li>
             <li><button onclick="cerrarSesion()" class="btn-salir">Salir</button></li>
         </ul>
     </nav>

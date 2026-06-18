@@ -1,4 +1,6 @@
-// EL GUARDIA DE SEGURIDAD
+// ==========================================
+// 1. EL GUARDIA DE SEGURIDAD
+// ==========================================
 if (localStorage.getItem('adminLogueado') !== 'true') {
     window.location.href = 'login.html';
 }
@@ -89,7 +91,7 @@ function abrirModalHabitacion() {
     }).then(async (result) => {
         if (result.isConfirmed) {
             const { numero, tipo_id, precio_noche } = result.value;
-            if(!numero || !precio_noche) return Swal.fire('Error', 'Campos vacíos', 'error');
+            if(!numero || !precio_noche) return Swal.fire({ icon: 'error', title: 'Error', text: 'Campos vacíos', background: '#1a1a1a', color: '#fff' });
 
             const response = await fetch('http://localhost:3001/api/habitaciones', {
                 method: 'POST',
@@ -120,7 +122,7 @@ async function abrirModalReserva() {
         const resHabitaciones = await fetch('http://localhost:3001/api/habitaciones');
         const habitaciones = await resHabitaciones.json();
 
-        // Generamos las opciones HTML para los selects
+        // Generamos las opciones HTML para los selects relacionando los IDs numéricos correspondientes
         let opcionesClientes = clientes.map(c => `<option value="${c.id}">${c.apellido}, ${c.nombre}</option>`).join('');
         let opcionesHabitaciones = habitaciones.map(h => `<option value="${h.id}">Habitación ${h.numero} (${h.tipo_habitacion})</option>`).join('');
 
@@ -133,16 +135,16 @@ async function abrirModalReserva() {
             confirmButtonText: 'Reservar',
             cancelButtonText: 'Cancelar',
             html: `
-                <label style="display:block; margin-top:10px;">Seleccione el Cliente:</label>
+                <label style="display:block; margin-top:10px; font-weight:bold; color:#d4af37; text-align:left; padding-left:15px;">Seleccione el Cliente:</label>
                 <select id="res-cliente" class="swal2-input" style="color:black; width: inherit;">${opcionesClientes}</select>
                 
-                <label style="display:block; margin-top:10px;">Seleccione la Habitación:</label>
+                <label style="display:block; margin-top:10px; font-weight:bold; color:#d4af37; text-align:left; padding-left:15px;">Seleccione la Habitación:</label>
                 <select id="res-habitacion" class="swal2-input" style="color:black; width: inherit;">${opcionesHabitaciones}</select>
                 
-                <label style="display:block; margin-top:10px;">Fecha de Entrada:</label>
+                <label style="display:block; margin-top:10px; font-weight:bold; color:#d4af37; text-align:left; padding-left:15px;">Fecha de Entrada:</label>
                 <input id="res-inicio" type="date" class="swal2-input" style="color:black;">
                 
-                <label style="display:block; margin-top:10px;">Fecha de Salida:</label>
+                <label style="display:block; margin-top:10px; font-weight:bold; color:#d4af37; text-align:left; padding-left:15px;">Fecha de Salida:</label>
                 <input id="res-fin" type="date" class="swal2-input" style="color:black;">
             `,
             preConfirm: () => {
@@ -151,13 +153,15 @@ async function abrirModalReserva() {
                     habitacion_id: document.getElementById('res-habitacion').value,
                     fecha_inicio: document.getElementById('res-inicio').value,
                     fecha_fin: document.getElementById('res-fin').value,
-                    estado_id: 1 // 1 significa 'Pendiente' por defecto en nuestra BD
+                    estado_id: 1 // 1 significa 'Pendiente' o 'Activa' por defecto en nuestra BD
                 }
             }
         }).then(async (result) => {
             if (result.isConfirmed) {
                 const reservaData = result.value;
-                if(!reservaData.fecha_inicio || !reservaData.fecha_fin) return Swal.fire('Error', 'Faltan las fechas', 'error');
+                if(!reservaData.fecha_inicio || !reservaData.fecha_fin) {
+                    return Swal.fire({ icon: 'error', title: 'Error', text: 'Faltan las fechas', background: '#1a1a1a', color: '#fff' });
+                }
 
                 const response = await fetch('http://localhost:3001/api/reservas', {
                     method: 'POST',
@@ -168,7 +172,9 @@ async function abrirModalReserva() {
 
                 if(data.creado) {
                     Swal.fire({ icon: 'success', title: data.mensaje, background: '#1a1a1a', color: '#fff' });
-                    cargarReservas(); // Recarga la tabla de inmediato
+                    cargarReservas(); // Recarga la tabla de inmediato si existe en la vista actual
+                } else {
+                    Swal.fire({ icon: 'error', title: data.error || 'No se pudo crear la reserva', background: '#1a1a1a', color: '#fff' });
                 }
             }
         });

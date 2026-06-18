@@ -72,10 +72,11 @@ async function cargarClientes() {
 async function registrarCliente(e) {
     e.preventDefault();
 
+    // Aplicamos .toLowerCase().trim() para normalizar el correo al guardar
     const clienteData = {
         nombre: document.getElementById('nombre').value,
         apellido: document.getElementById('apellido').value,
-        correo: document.getElementById('correo').value,
+        correo: document.getElementById('correo').value.toLowerCase().trim(),
         telefono: document.getElementById('telefono').value
     };
 
@@ -119,11 +120,11 @@ async function registrarCliente(e) {
         });
     }
 }
+
 // ==========================================
 // 5. FUNCIÓN PARA ELIMINAR CON ADVERTENCIA (DELETE)
 // ==========================================
 function confirmarEliminar(id) {
-    // Ventana de advertencia
     Swal.fire({
         title: '¿Estás seguro?',
         text: "Esta acción no se puede deshacer. Se borrará al cliente del sistema.",
@@ -131,12 +132,11 @@ function confirmarEliminar(id) {
         showCancelButton: true,
         background: '#1a1a1a',
         color: '#fff',
-        confirmButtonColor: '#d4af37', // Dorado
-        cancelButtonColor: '#d33',     // Rojo
+        confirmButtonColor: '#d4af37',
+        cancelButtonColor: '#d33',
         confirmButtonText: 'Sí, eliminar',
         cancelButtonText: 'Cancelar'
     }).then(async (result) => {
-        // Si el administrador hace clic en "Sí, eliminar"
         if (result.isConfirmed) {
             try {
                 const response = await fetch(`http://localhost:3001/api/clientes/${id}`, {
@@ -153,7 +153,6 @@ function confirmarEliminar(id) {
                         color: '#fff',
                         confirmButtonColor: '#d4af37'
                     });
-                    // Recargamos la tabla dinámicamente para ver los cambios
                     cargarClientes(); 
                 }
             } catch (error) {
@@ -168,12 +167,10 @@ function confirmarEliminar(id) {
 // ==========================================
 async function prepararEditar(id) {
     try {
-        // 1. Buscamos primero la lista completa para extraer los datos actuales de este cliente en específico
         const response = await fetch('http://localhost:3001/api/clientes');
         const clientes = await response.json();
         const cliente = clientes.find(c => c.id === id);
 
-        // 2. Abrimos una ventana emergente que contiene los campos con la información actual del cliente
         Swal.fire({
             title: 'Actualizar Datos del Cliente',
             background: '#1a1a1a',
@@ -183,29 +180,26 @@ async function prepararEditar(id) {
             cancelButtonColor: '#333',
             cancelButtonText: 'Cancelar',
             confirmButtonText: 'Guardar Cambios',
-            // Metemos los inputs directamente en el cuerpo del SweetAlert
             html: `
                 <input id="swal-nombre" class="swal2-input" style="color:black;" value="${cliente.nombre}" placeholder="Nombre">
                 <input id="swal-apellido" class="swal2-input" style="color:black;" value="${cliente.apellido}" placeholder="Apellido">
                 <input id="swal-correo" class="swal2-input" style="color:black;" value="${cliente.correo}" placeholder="Correo">
                 <input id="swal-telefono" class="swal2-input" style="color:black;" value="${cliente.telefono}" placeholder="Teléfono">
             `,
-            // Antes de confirmar, capturamos lo que el admin escribió en los inputs del modal
+            // Al capturar la edición, también pasamos el correo a minúsculas
             preConfirm: () => {
                 return {
                     nombre: document.getElementById('swal-nombre').value,
                     apellido: document.getElementById('swal-apellido').value,
-                    correo: document.getElementById('swal-correo').value,
+                    correo: document.getElementById('swal-correo').value.toLowerCase().trim(),
                     telefono: document.getElementById('swal-telefono').value
                 }
             }
         }).then(async (result) => {
-            // Si el admin le dio a "Guardar Cambios" y los campos no están vacíos
             if (result.isConfirmed) {
                 const datosActualizados = result.value;
 
                 try {
-                    // Enviamos la actualización al backend usando PUT
                     const resPut = await fetch(`http://localhost:3001/api/clientes/${id}`, {
                         method: 'PUT',
                         headers: { 'Content-Type': 'application/json' },
@@ -214,7 +208,6 @@ async function prepararEditar(id) {
                     const data = await resPut.json();
 
                     if (data.actualizado) {
-                        // Ventana emergente de confirmación exitosa
                         Swal.fire({
                             title: '¡Actualizado!',
                             text: data.mensaje,
@@ -223,7 +216,6 @@ async function prepararEditar(id) {
                             color: '#fff',
                             confirmButtonColor: '#d4af37'
                         });
-                        // Recargamos la tabla para ver los nuevos datos actualizados
                         cargarClientes();
                     } else {
                         Swal.fire({
