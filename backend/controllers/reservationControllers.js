@@ -82,3 +82,30 @@ exports.getAllRooms = (req, res) => {
         res.json(result);
     });
 };
+// UPDATE HABITACIÓN
+exports.updateRoom = (req, res) => {
+    const { id } = req.params;
+    const { numero, precio_noche } = req.body;
+    const sql = "UPDATE Habitaciones SET numero = ?, precio_noche = ? WHERE id = ?";
+    
+    db.query(sql, [numero, precio_noche, id], (err, result) => {
+        if (err) return res.status(500).json({ actualizado: false, error: "Error al actualizar la habitación" });
+        res.json({ actualizado: true, mensaje: "Habitación modificada con éxito." });
+    });
+};
+
+// DELETE HABITACIÓN
+exports.deleteRoom = (req, res) => {
+    const { id } = req.params;
+    const sql = "DELETE FROM Habitaciones WHERE id = ?";
+    
+    db.query(sql, [id], (err, result) => {
+        if (err) {
+            if (err.code === 'ER_ROW_IS_REFERENCED_2') {
+                return res.status(400).json({ eliminado: false, error: "No se puede eliminar la habitación porque tiene reservas activas vinculadas." });
+            }
+            return res.status(500).json({ eliminado: false, error: "Error al eliminar la habitación" });
+        }
+        res.json({ eliminado: true, mensaje: "Habitación removida del inventario correctamente." });
+    });
+};

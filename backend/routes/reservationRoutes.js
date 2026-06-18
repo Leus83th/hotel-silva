@@ -2,15 +2,22 @@ const express = require('express');
 const router = express.Router();
 const reservationController = require('../controllers/reservationControllers');
 
-// GET y POST de Reservas
+// ==========================================
+// 1. RUTAS ESPECÍFICAS DE HABITACIONES (Siempre arriba)
+// ==========================================
+router.get('/habitaciones', reservationController.getAllRooms);
+router.post('/habitaciones', reservationController.createRoom); // <-- ¡ESTA LÍNEA HACÍA FALTA!
+router.put('/habitaciones/:id', reservationController.updateRoom);
+router.delete('/habitaciones/:id', reservationController.deleteRoom);
+
+// ==========================================
+// 2. RUTAS DE RESERVAS
+// ==========================================
 router.get('/', reservationController.getAllReservations);
 router.post('/', reservationController.createReservation);
 
-// PUT y DELETE de Reservas
+// Rutas con parámetros dinámicos (Siempre al final)
 router.put('/:id', reservationController.updateReservation);
 router.delete('/:id', reservationController.deleteReservation);
-
-// AUXILIAR PARA EL MODAL DE RESERVAS
-router.get('/habitaciones', reservationController.getAllRooms);
 
 module.exports = router;
