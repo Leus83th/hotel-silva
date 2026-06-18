@@ -3,7 +3,6 @@
 // ==========================================================================
 const loginForm = document.getElementById('loginForm');
 
-// Con este IF evitamos que el código se rompa en las páginas de las tablas
 if (loginForm) {
     loginForm.addEventListener('submit', async (e) => {
         e.preventDefault(); 
@@ -64,22 +63,29 @@ if (loginForm) {
 }
 
 // ==========================================================================
-// 2. PROTECCIÓN DE RUTAS (Para que nadie entre escribiendo la URL)
+// 2. PROTECCIÓN DE RUTAS (CORREGIDO PARA EVITAR RECARGAS INFINITAS)
 // ==========================================================================
 document.addEventListener("DOMContentLoaded", function () {
     const sesionActiva = localStorage.getItem("adminLogueado");
+    
+    // Convertimos la ruta a minúsculas y verificamos si incluye 'login.html' de manera segura
+    const enPaginaLogin = window.location.pathname.toLowerCase().includes("login.html") || window.location.pathname === "/";
 
-    // Si no está logueado y trata de ver una tabla, lo mandamos al login
-    if (sesionActiva !== "true" && !window.location.pathname.includes("login.html")) {
+    // Si no está logueado y trata de ver una tabla u otra vista, lo mandamos al login
+    if (sesionActiva !== "true" && !enPaginaLogin) {
         window.location.href = "login.html";
+    }
+
+    // SI YA ESTÁ LOGUEADO e intenta entrar al login manualmente, lo enviamos directo a clientes
+    if (sesionActiva === "true" && enPaginaLogin) {
+        window.location.href = "clientes.html";
     }
 });
 
 // ==========================================================================
-// 3. FUNCIÓN GLOBAL PARA CERRAR SESIÓN (Se limpia con la clave correcta)
+// 3. FUNCIÓN GLOBAL PARA CERRAR SESIÓN
 // ==========================================================================
 function cerrarSesion() {
-    // Borramos exactamente la misma llave que creamos arriba
     localStorage.removeItem("adminLogueado"); 
 
     Swal.fire({
