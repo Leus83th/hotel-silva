@@ -62,10 +62,21 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
 // ==========================================
 // FUNCIÓN PARA CERRAR SESIÓN (LOGOUT)
 // ==========================================
+// Abre tu js/auth.js y verifica que la función se vea así:
 function cerrarSesion() {
-    // Borramos el dato que valida al guardia de seguridad
-    localStorage.removeItem('adminLogueado');
-    
-    // Mandamos al usuario directo al Login de vuelta
-    window.location.href = 'login.html';
+    // 1. Borramos el token o sesión (ejemplo usando localStorage)
+    localStorage.removeItem("usuarioLogueado"); 
+    // O sessionStorage.clear(); dependiendo de cómo manejes tu login
+
+    // 2. Alerta premium con SweetAlert2 antes de salir
+    Swal.fire({
+        title: 'Cerrando sesión',
+        text: '¡Gracias por usar el sistema del Hotel Silva!',
+        icon: 'success',
+        timer: 1500,
+        showConfirmButton: false
+    }).then(() => {
+        // 3. Redirección al login
+        window.location.href = "login.html";
+    });
 }
