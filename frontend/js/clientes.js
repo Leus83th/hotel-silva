@@ -9,7 +9,6 @@ if (localStorage.getItem('adminLogueado') !== 'true') {
 // 2. LÓGICA AL CARGAR LA PÁGINA
 // ==========================================
 document.addEventListener('DOMContentLoaded', () => {
-    
     // Si estamos en la página de la tabla, cargamos los clientes de inmediato
     if (document.getElementById('tablaClientesBody')) {
         cargarClientes();
@@ -37,7 +36,7 @@ async function cargarClientes() {
         tablaBody.innerHTML = "";
 
         // Si no hay clientes registrados aún
-        if (clientes.length === 0) {
+        if (!clientes || clientes.length === 0) {
             tablaBody.innerHTML = `<tr><td colspan="6" style="text-align:center;">No hay clientes registrados.</td></tr>`;
             return;
         }
@@ -46,15 +45,18 @@ async function cargarClientes() {
         clientes.forEach(cliente => {
             const fila = document.createElement('tr');
             
+            // Compatibilidad para bases de datos relacionales (id) o MongoDB (_id)
+            const clienteId = cliente.id || cliente._id;
+            
             fila.innerHTML = `
-                <td>${cliente.id}</td>
-                <td>${cliente.nombre}</td>
-                <td>${cliente.apellido}</td>
-                <td>${cliente.correo}</td>
-                <td>${cliente.telefono}</td>
+                <td>${clienteId}</td>
+                <td>${cliente.nombre || ''}</td>
+                <td>${cliente.apellido || ''}</td>
+                <td>${cliente.correo || cliente.email || ''}</td>
+                <td>${cliente.telefono || ''}</td>
                 <td>
-                    <button class="btn-editar" onclick="prepararEditar(${cliente.id})">Editar</button>
-                    <button class="btn-eliminar" onclick="confirmarEliminar(${cliente.id})">Eliminar</button>
+                    <button class="btn-editar" onclick="prepararEditar('${clienteId}')">Editar</button>
+                    <button class="btn-eliminar" onclick="confirmarEliminar('${clienteId}')">Eliminar</button>
                 </td>
             `;
             
@@ -72,7 +74,6 @@ async function cargarClientes() {
 async function registrarCliente(e) {
     e.preventDefault();
 
-    // Aplicamos .toLowerCase().trim() para normalizar el correo al guardar
     const clienteData = {
         nombre: document.getElementById('nombre').value,
         apellido: document.getElementById('apellido').value,
@@ -103,7 +104,7 @@ async function registrarCliente(e) {
             Swal.fire({
                 icon: 'warning',
                 title: 'Atención',
-                text: data.error,
+                text: data.error || 'No se pudo registrar el cliente',
                 background: '#1a1a1a',
                 color: '#fff',
                 confirmButtonColor: '#d4af37'
@@ -169,7 +170,14 @@ async function prepararEditar(id) {
     try {
         const response = await fetch('http://localhost:3001/api/clientes');
         const clientes = await response.json();
-        const cliente = clientes.find(c => c.id === id);
+        
+        // Buscamos el cliente evaluando tanto .id como ._id de forma segura
+        const cliente = clientes.find(c => (c.id === id || c._id === id || String(c.id) === String(id) || String(c._id) === String(id)));
+
+        if (!cliente) {
+            console.error("Cliente no encontrado en la lista local.");
+            return;
+        }
 
         Swal.fire({
             title: 'Actualizar Datos del Cliente',
@@ -181,12 +189,11 @@ async function prepararEditar(id) {
             cancelButtonText: 'Cancelar',
             confirmButtonText: 'Guardar Cambios',
             html: `
-                <input id="swal-nombre" class="swal2-input" style="color:black;" value="${cliente.nombre}" placeholder="Nombre">
-                <input id="swal-apellido" class="swal2-input" style="color:black;" value="${cliente.apellido}" placeholder="Apellido">
-                <input id="swal-correo" class="swal2-input" style="color:black;" value="${cliente.correo}" placeholder="Correo">
-                <input id="swal-telefono" class="swal2-input" style="color:black;" value="${cliente.telefono}" placeholder="Teléfono">
+                <input id="swal-nombre" class="swal2-input" style="color:black;" value="${cliente.nombre || ''}" placeholder="Nombre">
+                <input id="swal-apellido" class="swal2-input" style="color:black;" value="${cliente.apellido || ''}" placeholder="Apellido">
+                <input id="swal-correo" class="swal2-input" style="color:black;" value="${cliente.correo || cliente.email || ''}" placeholder="Correo">
+                <input id="swal-telefono" class="swal2-input" style="color:black;" value="${cliente.telefono || ''}" placeholder="Teléfono">
             `,
-            // Al capturar la edición, también pasamos el correo a minúsculas
             preConfirm: () => {
                 return {
                     nombre: document.getElementById('swal-nombre').value,
@@ -220,7 +227,7 @@ async function prepararEditar(id) {
                     } else {
                         Swal.fire({
                             title: 'Error',
-                            text: data.error,
+                            text: data.error || 'No se pudo actualizar',
                             icon: 'error',
                             background: '#1a1a1a',
                             color: '#fff',

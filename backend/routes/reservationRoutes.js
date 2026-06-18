@@ -2,9 +2,15 @@ const express = require('express');
 const router = express.Router();
 const reservationController = require('../controllers/reservationControllers');
 
-router.post('/reservas', reservationController.createReservation);
-router.get('/reservas', reservationController.getAllReservations);
-router.post('/habitaciones', reservationController.createRoom);
+// GET y POST de Reservas
+router.get('/', reservationController.getAllReservations);
+router.post('/', reservationController.createReservation);
+
+// PUT y DELETE de Reservas
+router.put('/:id', reservationController.updateReservation);
+router.delete('/:id', reservationController.deleteReservation);
+
+// AUXILIAR PARA EL MODAL DE RESERVAS
 router.get('/habitaciones', reservationController.getAllRooms);
 
 module.exports = router;

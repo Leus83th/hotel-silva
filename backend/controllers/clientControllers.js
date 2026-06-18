@@ -3,7 +3,7 @@ const db = require('../config/db');
 // CREATE
 exports.createClient = (req, res) => {
     const { nombre, apellido, correo, telefono } = req.body;
-    const sql = "INSERT INTO Clientes (nombre, apellido, correo, telefono) VALUES (?, ?, ?, ?)";
+    const sql = "INSERT INTO clientes (nombre, apellido, correo, telefono) VALUES (?, ?, ?, ?)";
     
     db.query(sql, [nombre, apellido, correo, telefono], (err, result) => {
         if (err) {
@@ -18,7 +18,7 @@ exports.createClient = (req, res) => {
 
 // READ
 exports.getAllClients = (req, res) => {
-    const sql = "SELECT * FROM Clientes";
+    const sql = "SELECT * FROM clientes";
     db.query(sql, (err, result) => {
         if (err) {
             return res.status(500).json({ error: "Error al obtener los clientes" });
@@ -31,7 +31,7 @@ exports.getAllClients = (req, res) => {
 exports.updateClient = (req, res) => {
     const { id } = req.params;
     const { nombre, apellido, correo, telefono } = req.body;
-    const sql = "UPDATE Clientes SET nombre = ?, apellido = ?, correo = ?, telefono = ? WHERE id = ?";
+    const sql = "UPDATE clientes SET nombre = ?, apellido = ?, correo = ?, telefono = ? WHERE id = ?";
     
     db.query(sql, [nombre, apellido, correo, telefono, id], (err, result) => {
         if (err) {

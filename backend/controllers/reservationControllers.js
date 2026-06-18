@@ -1,24 +1,29 @@
 const db = require('../config/db');
 
-// CREATE RESERVA
+// 1. CREATE RESERVA
 exports.createReservation = (req, res) => {
-    const { cliente_id, habitacion_id, fecha_inicio, fecha_fin, estado_id } = req.body;
+    const { clienteId, habitacionId, fechaInicio, fechaFin } = req.body;
+    const estado_id = 1; // ID por defecto para "Confirmada" en tu BD
+    
     const sql = "INSERT INTO Reservas (cliente_id, habitacion_id, fecha_inicio, fecha_fin, estado_id) VALUES (?, ?, ?, ?, ?)";
     
-    db.query(sql, [cliente_id, habitacion_id, fecha_inicio, fecha_fin, estado_id], (err, result) => {
-        if (err) return res.status(500).json({ creado: false, error: "Error al procesar la reserva" });
-        res.json({ creado: true, mensaje: "¡Reserva registrada con éxito!" });
+    db.query(sql, [clienteId, habitacionId, fechaInicio, fechaFin, estado_id], (err, result) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).json({ registrado: false, error: "Error al procesar la reserva" });
+        }
+        res.json({ registrado: true, mensaje: "¡Reserva registrada con éxito!" });
     });
 };
 
-// READ RESERVAS
+// 2. READ RESERVAS
 exports.getAllReservations = (req, res) => {
     const sql = `
         SELECT R.id, 
-               CONCAT(C.nombre, ' ', C.apellido) AS nombre_cliente, 
-               H.numero AS numero_habitacion, 
-               DATE_FORMAT(R.fecha_inicio, '%Y-%m-%d') AS fecha_inicio, 
-               DATE_FORMAT(R.fecha_fin, '%Y-%m-%d') AS fecha_fin, 
+               CONCAT(C.nombre, ' ', C.apellido) AS clienteNombre, 
+               H.numero AS habitacionNumero, 
+               DATE_FORMAT(R.fecha_inicio, '%Y-%m-%d') AS fechaInicio, 
+               DATE_FORMAT(R.fecha_fin, '%Y-%m-%d') AS fechaFin, 
                E.nombre AS estado
         FROM Reservas R
         INNER JOIN Clientes C ON R.cliente_id = C.id
@@ -31,23 +36,41 @@ exports.getAllReservations = (req, res) => {
     });
 };
 
-// CREATE HABITACIÓN
+// 3. UPDATE RESERVA (Añadido para solucionar el error del Router)
+exports.updateReservation = (req, res) => {
+    const { id } = req.params;
+    const { estado_id } = req.body;
+    const sql = "UPDATE Reservas SET estado_id = ? WHERE id = ?";
+    
+    db.query(sql, [estado_id, id], (err, result) => {
+        if (err) return res.status(500).json({ actualizado: false, error: "Error al actualizar" });
+        res.json({ actualizado: true, mensaje: "Reserva actualizada correctamente" });
+    });
+};
+
+// 4. DELETE RESERVA (Añadido para solucionar el error del Router)
+exports.deleteReservation = (req, res) => {
+    const { id } = req.params;
+    const sql = "DELETE FROM Reservas WHERE id = ?";
+    
+    db.query(sql, [id], (err, result) => {
+        if (err) return res.status(500).json({ eliminado: false, error: "Error al eliminar" });
+        res.json({ eliminado: true, mensaje: "Reserva eliminada con éxito" });
+    });
+};
+
+// 5. CREATE HABITACIÓN
 exports.createRoom = (req, res) => {
     const { numero, tipo_id, precio_noche } = req.body;
     const sql = "INSERT INTO Habitaciones (numero, tipo_id, precio_noche) VALUES (?, ?, ?)";
     
     db.query(sql, [numero, tipo_id, precio_noche], (err, result) => {
-        if (err) {
-            if (err.code === 'ER_DUP_ENTRY') {
-                return res.status(400).json({ creado: false, error: "El número de habitación ya existe." });
-            }
-            return res.status(500).json({ creado: false, error: "Error al registrar la habitación." });
-        }
+        if (err) return res.status(500).json({ creado: false, error: "Error al registrar la habitación." });
         res.json({ creado: true, mensaje: "¡Habitación agregada con éxito!" });
     });
 };
 
-// READ HABITACIONES
+// 6. READ HABITACIONES
 exports.getAllRooms = (req, res) => {
     const sql = `
         SELECT H.id, H.numero, T.nombre AS tipo_habitacion, H.precio_noche 

@@ -2,7 +2,7 @@ const db = require('../config/db');
 
 exports.login = (req, res) => {
     const { usuario, contrasena } = req.body;
-    const sql = "SELECT * FROM Administradores WHERE usuario = ? AND contrasena = ?";
+    const sql = "SELECT * FROM administradores WHERE usuario = ? AND contrasena = ?";
     
     db.query(sql, [usuario, contrasena], (err, result) => {
         if (err) {
